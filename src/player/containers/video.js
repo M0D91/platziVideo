@@ -1,24 +1,33 @@
 import React, {Component} from 'react';
-import VideoLayout from '../components/video';
+import Layout from '../components/video';
 
-class Video extends Component{
-    // autoplay = {
+class Video extends Component {
+    componentWillReceiveProps(nextProps){
+        // console.log('nextProps:', nextProps);
+        if (nextProps.pause !== this.props.pause) {
+            this.togglePlay();
+        }
+    }
 
-    // }
+    togglePlay(){
+        if(this.props.pause){
+            this.video.play();
+        } else {
+            this.video.pause();
+        }
+    }
+
+    setRef = (element) => {
+        this.video = element;
+    }
+
     render() {
-        console.log(this.props );
-        return(
-            <VideoLayout 
+        return (
+            <Layout 
                 src={this.props.src}
                 autoplay={this.props.autoplay}
+                setRef={this.setRef}
             />
-            // <div className='Video'>
-            //     <video
-            //         src={this.props.src}
-            //         autoPlay={this.props.autoplay}
-            //         // controls
-            //     />
-            // </div>
         )
     }
 }
