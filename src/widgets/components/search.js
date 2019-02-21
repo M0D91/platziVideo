@@ -10,14 +10,20 @@ import './search.css';
 // }
 
 // Lo de arriba tambien puede hacerse de modo pijo:
-const Search = () => (
+const Search = (props) => (
     <form 
         className='Search'
-        action=''>
-        <input 
+        onSubmit={props.handleSubmit}
+        // action=''
+        >
+        <input
+            ref={props.setRef} 
             type='text'
             className='Search-input'
             placeholder='Buscar video chachi'
+            name='search'
+            onChange={props.handleChange}
+            value={props.value}
             />
     </form>
 )
