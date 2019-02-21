@@ -22,11 +22,16 @@ class Video extends Component {
     }
 
     render() {
+        // const {
+        //     handleLoadedMetadata
+        // } = this.props;
+
         return (
             <Layout 
                 src={this.props.src}
                 autoplay={this.props.autoplay}
                 setRef={this.setRef}
+                metaData={this.props.metaData}
             />
         )
     }
