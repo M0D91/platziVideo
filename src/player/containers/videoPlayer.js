@@ -4,12 +4,14 @@ import Video from './video'
 import Title from '../components/videoTitle';
 import PlayPause from '../components/playPause';
 import Timer from '../components/timer';
+import Time from '../../utils/formatTime';
 import Controls from '../components/controls';
 
 class VideoPlayer extends Component {
     state = {
         pause: true,
-        duration: 0
+        duration: 0,
+        currentTime: 0
     }
 
     togglePlay = (event) => {
@@ -26,6 +28,13 @@ class VideoPlayer extends Component {
         })
     }
 
+    handleTimeUpdate = (event) => {
+        // console.log(this.video.currentTime)
+        this.setState({
+            currentTime: this.video.currentTime
+        })
+    }
+
     componentDidMount(){
         this.setState({
             // la siguiente linea es una especie de if super escueto
@@ -34,6 +43,7 @@ class VideoPlayer extends Component {
     }
 
     render() {
+        // console.log(this.state.currentTime);
         return (
             <Layout>
                 <Title 
@@ -45,13 +55,15 @@ class VideoPlayer extends Component {
                         handleClick={this.togglePlay}
                     />
                     <Timer 
-                        duration = {this.state.duration}
+                        duration = {Time(this.state.duration)}
+                        currentTime = {Time(this.state.currentTime)}
                     />
                 </Controls>
                 <Video 
                     autoplay={this.props.autoplay}
                     pause={this.state.pause}
                     metaData = {this.handleLoadedMetadata}
+                    currentTime = {this.handleTimeUpdate}
                     src='http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4' 
                 /> 
             </Layout>

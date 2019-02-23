@@ -1,14 +1,17 @@
 import React from 'react';
 import './timer.css';
 
-const Timer = (props) =>
-    // console.log('timeameesta', props)
-    (
-    <div className='Timer'>
-        <p>
-            <span>00 / {Math.round((props.duration/60) * 100) / 100 }</span>
-        </p>
-    </div>
-)
+const Timer = (props) => {
+    // console.log(props.currentTime, props.duration)
+    return (
+        <div className='Timer'>
+            <p>
+                <span>
+                    {props.currentTime +' / ' + props.duration}
+                </span>
+            </p>
+        </div>
+    )
+}
 
 export default Timer;

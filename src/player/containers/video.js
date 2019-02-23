@@ -32,6 +32,7 @@ class Video extends Component {
                 autoplay={this.props.autoplay}
                 setRef={this.setRef}
                 metaData={this.props.metaData}
+                currentTime={this.props.currentTime}
             />
         )
     }
