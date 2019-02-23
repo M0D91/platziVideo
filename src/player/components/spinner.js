@@ -6,7 +6,7 @@ const Spinner = (props) => {
     
     return (
         <div className='Spinner'>
-            <span>cargando...</span>
+            <span>Cargando...</span>
         </div>
     )
     

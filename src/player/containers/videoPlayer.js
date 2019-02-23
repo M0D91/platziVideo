@@ -8,13 +8,16 @@ import TimeFormat from '../../utils/formatTime';
 import Controls from '../components/controls';
 import ProgressBar from '../components/progressBar';
 import Spinner from '../components/spinner';
+import Volume from '../components/volume';
 
 class VideoPlayer extends Component {
     state = {
         pause: true,
         duration: 0,
         currentTime: 0,
-        loading: false
+        loading: false, 
+        volume : 0,
+        mute : false
     }
 
     togglePlay = (event) => {
@@ -55,9 +58,33 @@ class VideoPlayer extends Component {
         })
     }
 
+    handleVolumeChange = event => {
+        this.video.volume = event.target.value;
+    }
+
+    handleMuteToggle = () => {
+        const lastVolume = this.video.volume;
+
+        if (this.video.volume != 0){
+            this.video.volume = 0;
+
+            this.setState({
+                volume: lastVolume,
+                mute : true
+            })
+            
+        } else {
+            this.video.volume = this.state.volume;
+            
+            this.setState({
+                volume: 0,
+                mute: false
+            })
+        }
+    }
+
     componentDidMount(){
         this.setState({
-            // la siguiente linea es una especie de if super escueto
             pause: (!this.props.autoplay)
         })
     }
@@ -84,6 +111,11 @@ class VideoPlayer extends Component {
                         current = {this.state.currentTime}
                         target = {this.handleProgressChange}
 
+                    />
+                    <Volume 
+                        volume = {this.handleVolumeChange}
+                        muteToggle = {this.handleMuteToggle}
+                        mute = {this.state.mute}
                     />
                 </Controls>
 
