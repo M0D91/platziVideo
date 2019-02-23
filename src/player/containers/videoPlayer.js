@@ -4,8 +4,9 @@ import Video from './video'
 import Title from '../components/videoTitle';
 import PlayPause from '../components/playPause';
 import Timer from '../components/timer';
-import Time from '../../utils/formatTime';
+import TimeFormat from '../../utils/formatTime';
 import Controls from '../components/controls';
+import ProgressBar from '../components/progressBar';
 
 class VideoPlayer extends Component {
     state = {
@@ -35,6 +36,10 @@ class VideoPlayer extends Component {
         })
     }
 
+    handleProgressChange = event => {
+        this.video.currentTime = event.target.value
+    }
+
     componentDidMount(){
         this.setState({
             // la siguiente linea es una especie de if super escueto
@@ -55,8 +60,14 @@ class VideoPlayer extends Component {
                         handleClick={this.togglePlay}
                     />
                     <Timer 
-                        duration = {Time(this.state.duration)}
-                        currentTime = {Time(this.state.currentTime)}
+                        duration = {TimeFormat(this.state.duration)}
+                        currentTime = {TimeFormat(this.state.currentTime)}
+                    />
+                    <ProgressBar 
+                        duration = {this.state.duration}
+                        current = {this.state.currentTime}
+                        target = {this.handleProgressChange}
+
                     />
                 </Controls>
                 <Video 
