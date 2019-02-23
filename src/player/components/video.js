@@ -12,6 +12,8 @@ const Video = (props) => {
                 ref={props.setRef}
                 onLoadedMetadata={props.metaData}
                 onTimeUpdate={props.currentTime}
+                onSeeking={props.seeking}
+                onSeeked={props.seeked}
                 // controls
             />
         </div>

@@ -33,6 +33,8 @@ class Video extends Component {
                 setRef={this.setRef}
                 metaData={this.props.metaData}
                 currentTime={this.props.currentTime}
+                seeking = {this.props.seeking}
+                seeked = {this.props.seeked}
             />
         )
     }
