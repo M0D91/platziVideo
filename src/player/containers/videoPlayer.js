@@ -111,7 +111,7 @@ class VideoPlayer extends Component {
                 setRef = {this.setRef}
                 >
                 <Title 
-                    title={'cosa de titular'}
+                    title={this.props.title}
                 />
 
                 <Controls>
@@ -150,7 +150,7 @@ class VideoPlayer extends Component {
                     currentTime = {this.handleTimeUpdate}
                     seeking = {this.handleSeeking}
                     seeked = {this.handleSeeked}
-                    src='http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4' 
+                    src={this.props.src} 
                 /> 
             </Layout>
         )

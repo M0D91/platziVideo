@@ -1,21 +1,14 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-// const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env) => {
   const plugins = [
-    new ExtractTextPlugin("css/[name].css")
-  ]
-
-  // if (env.NODE_ENV === 'production') {
-  //   plugins.push(
-  //     new CleanWebpackPlugin(['dist'], {root: __dirname})
-  //   )
-  // }
+    new MiniCssExtractPlugin({
+      filename: "css/[name].css"
+    }),
+    ]
 
   return {
-    // mode: 'development',
     entry: {
       "home": path.resolve(__dirname, 'src/entries/home.js'),
     },
@@ -45,7 +38,13 @@ module.exports = (env) => {
         },
         {
           test: /\.css$/,
-            use: ['style-loader','css-loader'],
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {}
+              },
+                'css-loader'
+              ],
         },
         {
           test: /\.(jpg|png|gif|svg)$/,
