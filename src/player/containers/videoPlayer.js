@@ -9,6 +9,7 @@ import Controls from '../components/controls';
 import ProgressBar from '../components/progressBar';
 import Spinner from '../components/spinner';
 import Volume from '../components/volume';
+import FullScreen from '../components/fullScreen';
 
 class VideoPlayer extends Component {
     state = {
@@ -83,6 +84,20 @@ class VideoPlayer extends Component {
         }
     }
 
+    handleFullScreenClick = (event) => {
+
+        // console.log('hacete grande');
+        if(!document.webkitIsFullScreen) {
+            this.player.webkitRequestFullScreen();
+        } else {
+            document.exitFullscreen();
+        }
+    } 
+
+    setRef = (element) => {
+        this.player = element;
+    }
+
     componentDidMount(){
         this.setState({
             pause: (!this.props.autoplay)
@@ -92,7 +107,9 @@ class VideoPlayer extends Component {
     render() {
         // console.log(this.state.currentTime);
         return (
-            <Layout>
+            <Layout 
+                setRef = {this.setRef}
+                >
                 <Title 
                     title={'cosa de titular'}
                 />
@@ -116,6 +133,9 @@ class VideoPlayer extends Component {
                         volume = {this.handleVolumeChange}
                         muteToggle = {this.handleMuteToggle}
                         mute = {this.state.mute}
+                    />
+                    <FullScreen 
+                        handleFullScreen = {this.handleFullScreenClick}
                     />
                 </Controls>
 
